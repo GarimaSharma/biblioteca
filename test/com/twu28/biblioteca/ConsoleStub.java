@@ -7,8 +7,8 @@ public class ConsoleStub implements Console {
     public List<String> storedPrintedDataList = new ArrayList<String>();
 
     @Override
-    public int scanData() {
-        return Integer.parseInt(storedPrintedDataList.remove(0));
+    public String scanData() {
+        return storedPrintedDataList.remove(0);
     }
 
 

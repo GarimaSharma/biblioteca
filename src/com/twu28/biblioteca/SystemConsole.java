@@ -12,8 +12,14 @@ public class SystemConsole implements Console {
     }
 
     @Override
-    public int scanData() {
-        return new Scanner(System.in).nextInt();
+    public String scanData() {
+        try{
+        return new Scanner(System.in).next();
+        }
+        catch (RuntimeException runtimeException){
+            int temp = new Scanner(System.in).nextInt();
+            return temp+"";
+        }
     }
 
     @Override

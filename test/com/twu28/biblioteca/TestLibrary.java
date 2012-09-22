@@ -46,42 +46,52 @@ public class TestLibrary {
     @Test
     public void reservingBookMessageShouldCome(){
         console.println("2");
+        console.println("1111-1111");
+        console.println("password");
         console.println("5");
         console.println("5");
         Library library = new Library(console);
         library.startMenu();
-        Assert.assertEquals("enter the book number",console.getStoredData(17));
+        Assert.assertEquals("enter the book number",console.getStoredData(19));
 
     }
     @Test
         public void afterReservingBookMessageShouldCome(){
             console.println("2");
+            console.println("1111-1111");
+            console.println("password");
             console.println("5");
             console.println("5");
             Library library = new Library(console);
             library.startMenu();
-            Assert.assertEquals("thank you enjoy the book",console.getStoredData(18));
+            Assert.assertEquals("thank you enjoy the book",console.getStoredData(20));
 
         }
     @Test
         public void tryingToReserveAlreadyReservedBook(){
         console.println("2");
+        console.println("1111-1111");
+        console.println("password");
         console.println("5");
         console.println("2");
+        console.println("1111-1111");
+        console.println("password");
         console.println("5");
         console.println("5");
         Library library = new Library(console);
         library.startMenu();
-        Assert.assertEquals("sorry we don't have book yet",console.getStoredData(36));
+        Assert.assertEquals("sorry we don't have book yet",console.getStoredData(40));
 
     }
     @Test
     public void whenCustomerOptForHisDetails(){
         console.println("3");
+        console.println("1111-1111");
+        console.println("password");
         console.println("5");
         Library library = new Library(console);
         library.startMenu();
-        Assert.assertEquals("Please talk to librarian.",console.getStoredData(8));
+        Assert.assertEquals("Please talk to librarian.",console.getStoredData(10));
     }
     @Test (expected = RuntimeException.class)
     public void onExitNoDataMustGetPrintedToConsole(){
@@ -112,6 +122,18 @@ public class TestLibrary {
         Assert.assertEquals("movie14    director14    1990    N/A",console.getStoredData(21));
         Assert.assertEquals("movie15    director15    1990    N/A",console.getStoredData(22));
 
+    }
+    @Test
+    public void userMustBeAskedToEnterHisUserNameFollowedByPasswordWhenHeTriesToReserveBook(){
+        console.println("2");
+        console.println("1111-1111");
+        console.println("password");
+        console.println("5");
+        console.println("5");
+        Library library = new Library(console);
+        library.startMenu();
+        Assert.assertEquals("enter your username",console.getStoredData(8));
+        Assert.assertEquals("enter your password",console.getStoredData(9));
     }
 
 

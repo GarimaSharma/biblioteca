@@ -7,6 +7,7 @@ public class Library {
     BookManager bookManager;
     MovieManager movieManager;
     private Console console;
+    UserManager userManager;
 
     Library(Console console) {
         List<Book> books = new ArrayList<Book>();
@@ -21,6 +22,7 @@ public class Library {
         books.add(new Book("xyz9"));
         bookManager = new BookManager(books);
         movieManager = new MovieManager();
+        userManager = new UserManager();
         this.console = console;
     }
 
@@ -28,15 +30,17 @@ public class Library {
         console.println("Welcome");
         while (true) {
             firstDisplayMenu();
-            int userSelection = console.scanData();
+            int userSelection = Integer.parseInt(console.scanData());
             switch (userSelection) {
                 case 1:
                     listAllBooks();
                     break;
                 case 2:
+                    loginAttempt();
                     reserveABook();
                     break;
                 case 3:
+                    loginAttempt();
                     printLibraryNumber();
                     break;
                 case 4:
@@ -49,6 +53,23 @@ public class Library {
                     break;
             }
         }
+    }
+
+    private void loginAttempt() {
+        String username = askUserForUsername();
+        String password = askUserForPassword();
+        userManager.login(username,password);
+    }
+
+    private String askUserForPassword() {
+        console.println("enter your password");
+        return console.scanData();
+    }
+
+    private String askUserForUsername() {
+        console.println("enter your username");
+        return console.scanData();
+
     }
 
     private void viewMovies() {
@@ -79,7 +100,7 @@ public class Library {
     private void reserveABook() {
         listAllBooks();
         console.println("enter the book number");
-        int userSelection = console.scanData();
+        int userSelection = Integer.parseInt(console.scanData());
         try {
             bookManager.reserveBook(userSelection);
             console.println("thank you enjoy the book");
