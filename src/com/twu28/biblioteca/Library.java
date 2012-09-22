@@ -2,15 +2,13 @@ package com.twu28.biblioteca;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Library {
+    BookManager bookManager;
+    private Console console;
 
-    public static void main(String args[]){
-        BookManager bookManager;
-         CustomerManager customerManager;
+    Library(Console console) {
         List<Book> books = new ArrayList<Book>();
-
         books.add(new Book("xyz1"));
         books.add(new Book("xyz2"));
         books.add(new Book("xyz3"));
@@ -18,57 +16,72 @@ public class Library {
         books.add(new Book("xyz5"));
         books.add(new Book("xyz6"));
         books.add(new Book("xyz7"));
+        books.add(new Book("xyz8"));
+        books.add(new Book("xyz9"));
         bookManager = new BookManager(books);
-        customerManager = new CustomerManager();
+        this.console = console;
+    }
 
-        Scanner scanner = new Scanner(System.in);
-        while (true){
-        System.out.println("***************************************************************");
-        System.out.println("* Welcome to The Bangalore Public Library System - Biblioteca *");
-        System.out.println("***************************************************************");
-        System.out.println("*                     Menu                                    *");
-        System.out.println("*              =====================                          *");
-        System.out.println("*              1. List Book Catalog                           *");
-        System.out.println("*              2. Check out Book                              *");
-        System.out.println("*              3. Check Library Number                        *");
-       System.out.println("***************************************************************");
-        System.out.println("Your Selection: ");
-        try{
-            switch (scanner.nextInt()){
-                case 1:System.out.println(bookManager.getBookList());
+    public void startMenu() {
+        console.println("Welcome");
+        while (true) {
+            firstDisplayMenu();
+            int userSelection = console.scanData();
+            switch (userSelection) {
+                case 1:
+                    listAllBooks();
                     break;
-                case 2:  System.out.println("Enter the number of book");
-                    try{
-                            switch (new Scanner(System.in).nextInt()){
-                                case 1:
-                                case 2:
-                                case 3:
-                                case 4:
-                                case 5:
-                                case 6:
-                                case 7:
-                                    System.out.println("Thank You! Enjoy the book.");
-                                    break;
-                                default:System.out.println("Sorry");
-                            }
-                        }
-                    catch (RuntimeException exception){
-                        System.out.println("enter a valid option");
-                        break;
-                    }
+                case 2:
+                    reserveABook();
                     break;
-                case 3: System.out.println(); //dnot know wat to do
+                case 3:
+                    printLibraryNumber();
                     break;
-                default: System.out.println("enter a valid option");
+                case 4:
+                    return;
+                default:
+                    enterValidOption();
+                    break;
+            }
         }
-        }
-        catch (RuntimeException exception){
-            System.out.println("enter a valid option");
+    }
 
+    private void enterValidOption() {
+        console.println("Please enter valid option");
+    }
+
+    private void firstDisplayMenu() {
+        console.println("Menu");
+        console.println("1. List Book Catalog");
+        console.println("2. Check out Book");
+        console.println("3. Check Library Number");
+        console.println("4. Exit");
+        console.println("Your Selection: ");
+    }
+
+    private void printLibraryNumber() {
+        console.println("Please talk to librarian.");
+    }
+
+    private void reserveABook() {
+        listAllBooks();
+        console.println("enter the book number");
+        int userSelection = console.scanData();
+        try {
+            bookManager.reserveBook(userSelection);
+            console.println("thank you enjoy the book");
+        } catch (Exception exception) {
+            console.println("sorry we don't have book yet");
         }
 
 
     }
+
+    private void listAllBooks() {
+        List<String> bookNames = bookManager.getBookNamesList();
+        for (String bookName : bookNames) {
+            console.println(bookName);
+        }
 
     }
 }

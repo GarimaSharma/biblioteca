@@ -31,7 +31,7 @@ public class TestBookManager {
         booksName.add("xyz6");
         booksName.add("xyz7");
         BookManager bookManager = new BookManager(books);
-        Assert.assertEquals(booksName,bookManager.getBookList());
+        Assert.assertEquals(booksName,bookManager.getBookNamesList());
 
 
     }
@@ -39,7 +39,16 @@ public class TestBookManager {
     public void bookCanBeReserved(){
         books.add(book);
         BookManager bookManager = new BookManager(books);
-        bookManager.reservBook(book);
+        bookManager.reserveBook(7);
+        Assert.assertTrue(book.isAlreadyReserved());
     }
 
+    @Test (expected = RuntimeException.class)
+    public void reservedBookCanNotBeReserved(){
+        books.add(book);
+        BookManager bookManager = new BookManager(books);
+        bookManager.reserveBook(7);
+        bookManager.reserveBook(7);
+
+    }
 }

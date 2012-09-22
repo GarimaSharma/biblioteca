@@ -9,4 +9,11 @@ public class TestBook {
         Book book = new Book("xyz");
         Assert.assertTrue((book.getName()).equals("xyz"));
     }
+    @Test
+    public void availabiltyShouldGetFalseIfBookIsReserved(){
+        Book book = new Book("xyz");
+        Assert.assertFalse(book.isAlreadyReserved());
+        book.reserve();
+        Assert.assertTrue(book.isAlreadyReserved());
+    }
 }

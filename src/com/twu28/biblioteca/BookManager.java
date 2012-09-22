@@ -10,7 +10,7 @@ public class BookManager {
         this.booksInLibrary = books;
     }
 
-    public List<String> getBookList() {
+    public List<String> getBookNamesList() {
         List<String> booksName = new ArrayList<String>();
         for (Book book : booksInLibrary) {
             booksName.add(book.getName());
@@ -18,7 +18,9 @@ public class BookManager {
         return booksName;
     }
 
-    public void reservBook(Book book) {
-        //To change body of created methods use File | Settings | File Templates.
+    public void reserveBook(int index) {
+        Book book = booksInLibrary.get(index);
+        if (book.isAlreadyReserved()) throw new RuntimeException("booked");
+        book.reserve();
     }
 }
