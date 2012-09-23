@@ -8,6 +8,7 @@ public class Library {
     MovieManager movieManager;
     private Console console;
     UserManager userManager;
+    User user;
 
     Library(Console console) {
         List<Book> books = new ArrayList<Book>();
@@ -36,12 +37,15 @@ public class Library {
                     listAllBooks();
                     break;
                 case 2:
-                    loginAttempt();
+                    while ((user == null)) user=loginAttempt();
                     reserveABook();
                     break;
                 case 3:
-                    loginAttempt();
-                    printLibraryNumber();
+                    if(user != null){
+                        printLibraryNumber(user);
+                    break;
+                    }
+                    console.println("Please talk to librarian.");
                     break;
                 case 4:
                     viewMovies();
@@ -55,10 +59,10 @@ public class Library {
         }
     }
 
-    private void loginAttempt() {
+    private User loginAttempt() {
         String username = askUserForUsername();
         String password = askUserForPassword();
-        userManager.login(username,password);
+        return userManager.login(username,password);
     }
 
     private String askUserForPassword() {
@@ -93,8 +97,9 @@ public class Library {
         console.println("Your Selection: ");
     }
 
-    private void printLibraryNumber() {
-        console.println("Please talk to librarian.");
+    private void printLibraryNumber(User user) {
+        console.println(userManager.getDetailsOfUser(user));
+
     }
 
     private void reserveABook() {

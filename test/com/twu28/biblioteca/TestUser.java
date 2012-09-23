@@ -8,6 +8,11 @@ public class TestUser {
     @Before
     public void setUsernameGeneratingData(){
         User.usernameGeneratingData = 1111;
+    }
+    @Test
+    public void userDetailsMustBePrinted(){
+        User user = new User("garima","garima@yahoo.com",271390,"password");
+        Assert.assertEquals("garima  garima@yahoo.com  271390",user.getDetails());
 
     }
     @Test

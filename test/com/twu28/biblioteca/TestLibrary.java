@@ -74,24 +74,20 @@ public class TestLibrary {
         console.println("password");
         console.println("5");
         console.println("2");
-        console.println("1111-1111");
-        console.println("password");
         console.println("5");
         console.println("5");
         Library library = new Library(console);
         library.startMenu();
-        Assert.assertEquals("sorry we don't have book yet",console.getStoredData(40));
+        Assert.assertEquals("sorry we don't have book yet",console.getStoredData(38));
 
     }
     @Test
     public void whenCustomerOptForHisDetails(){
         console.println("3");
-        console.println("1111-1111");
-        console.println("password");
-        console.println("5");
+       console.println("5");
         Library library = new Library(console);
-        library.startMenu();
-        Assert.assertEquals("Please talk to librarian.",console.getStoredData(10));
+         library.startMenu();
+        Assert.assertEquals("Please talk to librarian.",console.getStoredData(8));
     }
     @Test (expected = RuntimeException.class)
     public void onExitNoDataMustGetPrintedToConsole(){
@@ -135,6 +131,18 @@ public class TestLibrary {
         Assert.assertEquals("enter your username",console.getStoredData(8));
         Assert.assertEquals("enter your password",console.getStoredData(9));
     }
+    @Test
+    public void detailsMustGetPrintedIfUSerIsAlreadyLoggedIn(){
+        console.println("2");
+        console.println("1111-1111");
+        console.println("password");
+        console.println("5");
+        console.println("3");
+        console.println("5");
+        Library library = new Library(console);
+        library.startMenu();
+        Assert.assertEquals("garima  garima@yahoo.com  271390",console.getStoredData(28));
 
 
+    }
 }

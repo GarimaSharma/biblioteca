@@ -20,10 +20,18 @@ public class UserManager {
         registeredUsers.add(new User("garima","garima@yahoo.com",271390,"password"));
     }
 
-    public boolean login(String username, String password) {
+    public User login(String username, String password) {
         for (User user : registeredUsers) {
-            if(user.checkPassword(username,password))return true;
+            if(user.checkPassword(username,password))return user;
         }
-        return false;
+        return null;
     }
+    public String getDetailsOfUser(User userAttemptingToGetDetails){
+        for (User user : registeredUsers) {
+            if(user.equals(userAttemptingToGetDetails))return user.getDetails();
+
+        }
+       throw new RuntimeException("please login");
+    }
+
 }
