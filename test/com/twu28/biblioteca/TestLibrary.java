@@ -1,10 +1,16 @@
 package com.twu28.biblioteca;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class TestLibrary {
     Console console = new ConsoleStub();
+
+    @Before
+    public void setUsernameGeneratingData(){
+        User.usernameGeneratingData = 1111;
+    }
     @Test
     public void menuMustBePrintedToConsole(){
         console.println("5");

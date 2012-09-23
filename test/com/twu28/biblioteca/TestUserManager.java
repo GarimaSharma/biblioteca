@@ -27,14 +27,14 @@ public class TestUserManager {
         UserManager userManager = new UserManager();
         Assert.assertNull(userManager.login("1111-1111","wrong"));
     }
-    @Test  (expected = RuntimeException.class)
+    @Test
     public void detailsCanBeSeenOfUser(){
         User user;
         UserManager userManager = new UserManager();
         user= userManager.login("1111-1111","password");
         Assert.assertEquals("garima  garima@yahoo.com  271390",userManager.getDetailsOfUser(user));
     }
-    @Test
+    @Test  (expected = RuntimeException.class)
     public void exceptionGetsGeneratedIfDetailsAreAskedBeforeLogin(){
         User user =null;
         UserManager userManager = new UserManager();
