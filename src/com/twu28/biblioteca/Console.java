@@ -6,4 +6,6 @@ public interface Console {
     public String scanData();
 
     public String getStoredData(int index);
+
+    public void acceptAsInput(String inputString);
 }

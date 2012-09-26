@@ -1,4 +1,5 @@
 package com.twu28.biblioteca;
+
 public class Movie {
     private String name;
     private String director;
@@ -7,7 +8,7 @@ public class Movie {
     private int defaultRatingForNonRatedMovies = 0;
 
     public Movie(String name, String director, int year, int rating) {
-        this.name= name;
+        this.name = name;
         this.director = director;
         this.year = year;
         this.rating = rating;
@@ -19,7 +20,7 @@ public class Movie {
         stringBuilder.append("    ");
         stringBuilder.append(director);
         stringBuilder.append("    ");
-        if(rating == defaultRatingForNonRatedMovies){
+        if (rating == defaultRatingForNonRatedMovies) {
             stringBuilder.append(year);
             stringBuilder.append("    ");
             stringBuilder.append("N/A");

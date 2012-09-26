@@ -16,7 +16,7 @@ public class Book {
     }
 
     public boolean isAlreadyReserved() {
-        return !available;
+        return available;
     }
 
     public void reserve() {

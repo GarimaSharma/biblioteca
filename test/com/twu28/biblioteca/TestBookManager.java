@@ -8,19 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TestBookManager {
-    List<Book> books = new ArrayList<Book>();
-    Book book = new Book("xyz7");
-    @Before
-    public void setBookList(){
-        books.add(new Book("xyz1"));
-        books.add(new Book("xyz2"));
-        books.add(new Book("xyz3"));
-        books.add(new Book("xyz4"));
-        books.add(new Book("xyz5"));
-        books.add(new Book("xyz6"));
-        books.add(new Book("xyz7"));
-    }
-    @Test
+      @Test
     public void booksCanBeDisplayed(){
         List<String> booksName = new ArrayList<String>();
         booksName.add("xyz1");
@@ -30,23 +18,18 @@ public class TestBookManager {
         booksName.add("xyz5");
         booksName.add("xyz6");
         booksName.add("xyz7");
-        BookManager bookManager = new BookManager(books);
+        booksName.add("xyz8");
+        booksName.add("xyz9");
+        BookManager bookManager = new BookManager();
         Assert.assertEquals(booksName,bookManager.getBookNamesList());
 
 
     }
-    @Test
-    public void bookCanBeReserved(){
-        books.add(book);
-        BookManager bookManager = new BookManager(books);
-        bookManager.reserveBook(7);
-        Assert.assertTrue(book.isAlreadyReserved());
-    }
+
 
     @Test (expected = RuntimeException.class)
-    public void reservedBookCanNotBeReserved(){
-        books.add(book);
-        BookManager bookManager = new BookManager(books);
+    public void reservedBookCanNotBeReservedThusABookWasReserved(){
+        BookManager bookManager = new BookManager();
         bookManager.reserveBook(7);
         bookManager.reserveBook(7);
 

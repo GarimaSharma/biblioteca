@@ -1,6 +1,5 @@
 package com.twu28.biblioteca;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Library {
@@ -11,17 +10,7 @@ public class Library {
     User user;
 
     Library(Console console) {
-        List<Book> books = new ArrayList<Book>();
-        books.add(new Book("xyz1"));
-        books.add(new Book("xyz2"));
-        books.add(new Book("xyz3"));
-        books.add(new Book("xyz4"));
-        books.add(new Book("xyz5"));
-        books.add(new Book("xyz6"));
-        books.add(new Book("xyz7"));
-        books.add(new Book("xyz8"));
-        books.add(new Book("xyz9"));
-        bookManager = new BookManager(books);
+        bookManager = new BookManager();
         movieManager = new MovieManager();
         userManager = new UserManager();
         this.console = console;
@@ -29,40 +18,55 @@ public class Library {
 
     public void startMenu() {
         console.println("Welcome");
+        startInteractingWithUser();
+    }
+
+    private void startInteractingWithUser() {
         while (true) {
             firstDisplayMenu();
             int userSelection = Integer.parseInt(console.scanData());
-            switch (userSelection) {
-                case 1:
-                    listAllBooks();
-                    break;
-                case 2:
-                    while ((user == null)) user=loginAttempt();
-                    reserveABook();
-                    break;
-                case 3:
-                    if(user != null){
-                        printLibraryNumber(user);
-                    break;
-                    }
-                    console.println("Please talk to librarian.");
-                    break;
-                case 4:
-                    viewMovies();
-                    break;
-                case 5:
-                    return;
-                default:
-                    enterValidOption();
-                    break;
+            if (userSelection == 1) {
+                listAllBooks();
+                continue;
             }
+            if (userSelection == 2) {
+                checkLoginStatus();
+                reserveABook();
+                continue;
+            }
+            if (userSelection == 3) {
+                viewLibraryNumber();
+                continue;
+
+            }
+            if (userSelection == 4) {
+                viewMovies();
+                continue;
+            }
+            if (userSelection == 5) return;
+
+            enterValidOption();
+        }
+    }
+
+    private void viewLibraryNumber() {
+        if (user != null) {
+            printLibraryNumber(user);
+            return;
+        }
+        console.println("Please talk to librarian.");
+    }
+
+    private void checkLoginStatus() {
+        while (user == null) {
+            user = loginAttempt();
         }
     }
 
     private User loginAttempt() {
         String username = askUserForUsername();
         String password = askUserForPassword();
-        return userManager.login(username,password);
+        return userManager.login(username, password);
     }
 
     private String askUserForPassword() {
@@ -112,8 +116,6 @@ public class Library {
         } catch (Exception exception) {
             console.println("sorry we don't have book yet");
         }
-
-
     }
 
     private void listAllBooks() {

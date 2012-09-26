@@ -22,4 +22,9 @@ public class ConsoleStub implements Console {
     public String getStoredData(int index) {
             return storedPrintedDataList.get(index);
     }
+
+    @Override
+    public void acceptAsInput(String inputString) {
+        println(inputString);
+    }
 }

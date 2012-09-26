@@ -13,17 +13,21 @@ public class SystemConsole implements Console {
 
     @Override
     public String scanData() {
-        try{
-        return new Scanner(System.in).next();
-        }
-        catch (RuntimeException runtimeException){
+        try {
+            return new Scanner(System.in).next();
+        } catch (RuntimeException runtimeException) {
             int temp = new Scanner(System.in).nextInt();
-            return temp+"";
+            return temp + "";
         }
     }
 
     @Override
     public String getStoredData(int index) {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void acceptAsInput(String inputString) {
+        println(inputString);
     }
 }

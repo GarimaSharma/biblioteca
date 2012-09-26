@@ -12,8 +12,8 @@ public class TestBook {
     @Test
     public void availabiltyShouldGetFalseIfBookIsReserved(){
         Book book = new Book("xyz");
-        Assert.assertFalse(book.isAlreadyReserved());
-        book.reserve();
         Assert.assertTrue(book.isAlreadyReserved());
+        book.reserve();
+        Assert.assertFalse(book.isAlreadyReserved());
     }
 }

@@ -13,9 +13,14 @@ public class TestLibrary {
     }
     @Test
     public void menuMustBePrintedToConsole(){
-        console.println("5");
+        // arrange
+        console.acceptAsInput("5");
         Library library = new Library(console);
+
+        // act
         library.startMenu();
+
+        // assert
         Assert.assertEquals("Welcome", console.getStoredData(0));
         Assert.assertEquals("Menu", console.getStoredData(1));
         Assert.assertEquals("1. List Book Catalog", console.getStoredData(2));
@@ -66,7 +71,7 @@ public class TestLibrary {
             console.println("2");
             console.println("1111-1111");
             console.println("password");
-            console.println("5");
+            console.println("4");
             console.println("5");
             Library library = new Library(console);
             library.startMenu();

@@ -27,12 +27,4 @@ public class TestUser {
         User user2 = new User("garima","garima@yahoo.com",271390,"password");
         Assert.assertTrue(user2.checkPassword("1111-1112","password"));
     }
-    @Test
-    public void equalityOfUserMustCheckSpecificAttributes(){
-        User user1 = new User("garima","garima@yahoo.com",271390,"password");
-        User user2 = user1;
-        Assert.assertTrue(user1.equals(user2));
-
-    }
-
 }

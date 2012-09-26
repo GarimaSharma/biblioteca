@@ -4,23 +4,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookManager {
-    List<Book> booksInLibrary = new ArrayList<Book>();
+   LibraryBooks libraryBooks = new LibraryBooks();
+    List<Book> books=libraryBooks.selectAllBooks();
+    public BookManager(){
+        libraryBooks.addBooks(new Book("xyz1"));
+        libraryBooks.addBooks(new Book("xyz2"));
+        libraryBooks.addBooks(new Book("xyz3"));
+        libraryBooks.addBooks(new Book("xyz4"));
+        libraryBooks.addBooks(new Book("xyz5"));
+        libraryBooks.addBooks(new Book("xyz6"));
+        libraryBooks.addBooks(new Book("xyz7"));
+        libraryBooks.addBooks(new Book("xyz8"));
+        libraryBooks.addBooks(new Book("xyz9"));
 
-    public BookManager(List<Book> books) {
-        this.booksInLibrary = books;
     }
-
     public List<String> getBookNamesList() {
         List<String> booksName = new ArrayList<String>();
-        for (Book book : booksInLibrary) {
+
+        for (Book book : books) {
             booksName.add(book.getName());
         }
         return booksName;
     }
 
     public void reserveBook(int index) {
-        Book book = booksInLibrary.get(index);
-        if (book.isAlreadyReserved()) throw new RuntimeException("booked");
+        Book book = books.get(index);
+        if (!book.isAlreadyReserved()) throw new RuntimeException("booked");
         book.reserve();
     }
 }
